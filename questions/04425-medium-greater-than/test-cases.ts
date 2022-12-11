@@ -9,3 +9,4 @@ type cases = [
   Expect<Equal<GreaterThan<10, 100>, false>>,
   Expect<Equal<GreaterThan<111, 11>, true>>,
 ]
+type GreaterThan<T extends number, U extends number, S extends any[] = []> = S['length'] extends T ? false : (S['length'] extends U ? true : GreaterThan<T, U, [...S, 1]>)

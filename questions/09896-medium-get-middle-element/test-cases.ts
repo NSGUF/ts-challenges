@@ -11,3 +11,6 @@ type cases = [
 ]
 // @ts-expect-error
 type error = GetMiddleElement<1, 2, 3>
+type GetMiddleElement<T extends any[]> = T['length'] extends 0 | 1 | 2 ? T : T extends [infer LL, ...infer MM, infer RR] ? (
+    GetMiddleElement<MM>
+) : [];

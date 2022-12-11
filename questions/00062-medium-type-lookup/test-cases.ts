@@ -17,3 +17,5 @@ type cases = [
   Expect<Equal<LookUp<Animal, 'dog'>, Dog>>,
   Expect<Equal<LookUp<Animal, 'cat'>, Cat>>,
 ]
+type LookUp<U, T> = U extends {type: T} ? U : never;
+

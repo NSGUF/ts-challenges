@@ -6,8 +6,10 @@ const spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFL
 type cases = [
   Expect<Equal<Length<typeof tesla>, 4>>,
   Expect<Equal<Length<typeof spaceX>, 5>>,
-  // @ts-expect-error
   Length<5>,
-  // @ts-expect-error
   Length<'hello world'>,
 ]
+type Length<T extends readonly any[]> = T['length']
+
+type test = Length<typeof spaceX>;
+let a: test = 5;

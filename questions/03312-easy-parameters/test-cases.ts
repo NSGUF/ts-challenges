@@ -9,3 +9,6 @@ type cases = [
   Expect<Equal<MyParameters<typeof bar>, [boolean, { a: 'A' }]>>,
   Expect<Equal<MyParameters<typeof baz>, []>>,
 ]
+type MyParameters<T extends (...args: any[]) => any> = T extends (...args: infer R) => any ? R : []
+
+type test = typeof foo

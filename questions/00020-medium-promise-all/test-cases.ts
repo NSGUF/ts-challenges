@@ -9,3 +9,11 @@ type cases = [
   Expect<Equal<typeof promiseAllTest2, Promise<[1, 2, number]>>>,
   Expect<Equal<typeof promiseAllTest3, Promise<[number, number, number]>>>,
 ]
+
+type GetPromise<T> = T extends Promise<infer A> ? GetPromise<A> : T
+
+declare function PromiseAll<T extends readonly unknown[]>(values: readonly [...T]): Promise<{
+  [K in keyof T]: GetPromise<T[K]>;
+}>
+type test = GetPromise<Promise.resolve<3>>;
+// TODO

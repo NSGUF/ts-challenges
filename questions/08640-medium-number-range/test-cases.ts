@@ -21,3 +21,12 @@ type cases = [
   Expect<Equal<NumberRange<0, 2>, Result2>>,
   Expect<Equal<NumberRange<0, 140>, Result3>>,
 ]
+// type test = [1,2,3]
+// type AddOn<T>
+// type NumberRange<L, H, S extends unknown[] = [], R extends number> = S['length'] extends L ?
+// type test2 = test[number]
+// type AddOn<M, Result extends unknown[] = []> = Result['length'] extends M ? [...Result, 1]['length'] : AddOn<M, [...Result, 1]>;
+// type NumberRange<L, H, Result extends unknown[] = []> = L extends H
+//     ? [...Result, L][number]
+//     : NumberRange<AddOn<L>, H, [...Result, L]>;
+// TODO

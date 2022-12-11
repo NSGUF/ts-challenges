@@ -13,3 +13,7 @@ type errors = [
   // @ts-expect-error
   First<{ 0: 'arrayLike' }>,
 ]
+type First<T extends any[]> = T extends [r: infer R, ...args: any[]] ? R : never;
+type First1<T extends any[]> = T[0]
+type test = First<[]>;
+type test1 = First1<[]>;

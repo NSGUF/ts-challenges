@@ -8,3 +8,5 @@ type cases = [
   Expect<Equal<IsTuple<number[]>, false>>,
   Expect<Equal<IsTuple<never>, false>>,
 ]
+type IsTuple<T> = [T] extends [never] ? false : T extends readonly [...unknown[]] ? (any[] extends T ? false : true) : false
+// type IsTuple<T> = [T] extends [never] ? false : T extends readonly [...unknown[]] ? (any[] extends T ? false : true) : false

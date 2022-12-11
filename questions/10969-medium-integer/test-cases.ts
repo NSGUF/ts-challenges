@@ -11,3 +11,6 @@ type cases1 = [
   Expect<Equal<Integer<typeof x>, never>>,
   Expect<Equal<Integer<typeof y>, 1>>,
 ]
+type Integer<T extends number | string> = number extends T ? never : (
+    `${T}` extends `${infer L}.${infer R}` ? never : T
+    );

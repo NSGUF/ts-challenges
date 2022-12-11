@@ -13,3 +13,10 @@ type cases = [
   >>,
   Expect<Equal<typeof curried3, () => true>>,
 ]
+declare function Currying<F>(fn: F): Gurred<F>
+
+type Gurred<F> = F extends ((l: infer L, ...arg: infer R) => infer S) ? Gurred<(...R) => S> : S
+
+type test = typeof curried1
+
+// TODO

@@ -8,3 +8,4 @@ type cases = [
   Expect<Equal<IsPalindrome<121>, true>>,
   Expect<Equal<IsPalindrome<19260817>, false>>,
 ]
+type IsPalindrome<T> = any

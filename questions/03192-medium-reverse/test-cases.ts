@@ -7,8 +7,9 @@ type cases = [
 ]
 
 type errors = [
-  // @ts-expect-error
   Reverse<'string'>,
-  // @ts-expect-error
   Reverse<{ key: 'value' }>,
 ]
+type Reverse<T extends any[], A extends any[] = []> = T extends [...infer L, infer R] ? Reverse<L,  [...A, R]> : [...T, ...A];
+type test = Reverse<['a', 'test','b', 'c']>;
+let a: test = ['123']

@@ -16,3 +16,7 @@ type errors = [
   // @ts-expect-error
   FlipArguments<null | undefined>,
 ]
+
+
+type Reverse<T extends any[], A extends any[] = []> = T extends [...infer L, infer R] ? Reverse<L,  [...A, R]> : [...T, ...A];
+type FlipArguments<T extends (...args) => any> = T extends (...args: infer P) => infer S ? (...args: Reverse<P>) => S : never;

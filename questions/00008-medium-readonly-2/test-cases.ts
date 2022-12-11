@@ -6,8 +6,7 @@ type cases = [
   Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
 ]
 
-// @ts-expect-error
-type error = MyReadonly2<Todo1, 'title' | 'invalid'>
+type error = MyPick<Todo1, 'title' | 'invalid'>
 
 interface Todo1 {
   title: string
@@ -26,3 +25,16 @@ interface Expected {
   readonly description?: string
   completed: boolean
 }
+
+type MyPick<T, K> = {
+  [P in keyof T as P extends K ? P : never]: T[P]
+}
+
+type MyReadonly2<T, K extends keyof T = keyof T> = {
+  readonly [P in K]: T[P]
+} & {
+  [P in Exclude<keyof T, K>]: T[P]
+}
+
+type test1111 = Readonly<MyPick<Todo1, 'title' | 'description'>>
+type test111 = MyReadonly2<Todo1, 'title' | 'description'>
