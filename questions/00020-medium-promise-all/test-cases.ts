@@ -15,6 +15,4 @@ type GetPromise<T> = T extends Promise<infer A> ? GetPromise<A> : T
 declare function PromiseAll<T extends readonly unknown[]>(values: readonly [...T]): Promise<{
   [K in keyof T]: GetPromise<T[K]>;
 }>
-type test = GetPromise<Promise.resolve<3>>;
-// TODO
-let a:test = 1;
+type test = typeof promiseAllTest3;
