@@ -17,3 +17,4 @@ declare function PromiseAll<T extends readonly unknown[]>(values: readonly [...T
 }>
 type test = GetPromise<Promise.resolve<3>>;
 // TODO
+let a:test = 1;
