@@ -20,3 +20,6 @@ type Data = {
   'foo.baz': false
   hello: 'world'
 }
+type Get<T, K> = K extends keyof T ? T[K] : (
+  K extends `${infer L}.${infer R}` ? L extends keyof T ? Get<T[L], R> : never : never
+);

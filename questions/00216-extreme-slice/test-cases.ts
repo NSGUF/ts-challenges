@@ -24,4 +24,15 @@ type cases = [
   Expect<Equal<Slice<Arr, 10, 20>, []>>,
 ]
 
-type Slice<Arr, Start, End> = any
+type Slice<Arr, Start extends number = 0, End extends number = -1, S extends any[] = [], Result extends any[] = [], isStart extends boolean = false> = Start extends End ? [] : (
+  Arr extends [infer L, ...infer R] ? (
+    S['length'] extends Start ? Slice<R, Start, End, [...S, 1], [...Result, L], true> : (
+      isStart extends true ? (
+        S['length'] extends End ? Result : Slice<R, Start, End, [...S, 1], [...Result, L], true>
+      ) : Slice<R, Start, End, [...S, 1], [], true>
+    )
+  ) : Result
+);
+type test = Slice<Arr, 0, 0>;
+
+// TODO

@@ -8,3 +8,4 @@ type cases = [
   Expect<Equal<IsAny<never>, false>>,
   Expect<Equal<IsAny<string>, false>>,
 ]
+type IsAny<T> = Equal<any, T>

@@ -7,3 +7,4 @@ type cases = [
 
 // @ts-expect-error
 type error = If<null, 'a', 'b'>
+type If<C extends boolean, T, F> =  C extends true ? T : F
