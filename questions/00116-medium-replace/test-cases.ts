@@ -8,3 +8,8 @@ type cases = [
   Expect<Equal<Replace<'foobarbar', 'bra', 'foo'>, 'foobarbar'>>,
   Expect<Equal<Replace<'', '', ''>, ''>>,
 ]
+type Replace<S extends string, From extends string, To extends string> = S extends `${infer L}${From}${infer R}` ? (
+  From extends '' ? S : `${L}${To}${R}`
+) : S;
+
+type test = Replace<'foobarbar', '', 'foo'>;

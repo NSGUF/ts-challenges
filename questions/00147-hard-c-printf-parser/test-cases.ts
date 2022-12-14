@@ -12,3 +12,16 @@ type cases = [
   Expect<Equal<ParsePrintFormat<'Hello %s: score is %d.'>, ['string', 'dec']>>,
   Expect<Equal<ParsePrintFormat<'The result is %'>, []>>,
 ]
+type ControlsMap = {
+  c: 'char'
+  s: 'string'
+  d: 'dec'
+  o: 'oct'
+  h: 'hex'
+  f: 'float'
+  p: 'pointer'
+}
+
+type ParsePrintFormat<S extends string> = S extends `${infer L}%${infer C}${infer R}` ? (
+  C extends keyof ControlsMap ? [ControlsMap[C], ...ParsePrintFormat<R>] : ParsePrintFormat<R>
+) : [];

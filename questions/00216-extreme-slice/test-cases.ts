@@ -23,3 +23,5 @@ type cases = [
   Expect<Equal<Slice<Arr, 1, 0>, []>>,
   Expect<Equal<Slice<Arr, 10, 20>, []>>,
 ]
+
+type Slice<Arr, Start, End> = any

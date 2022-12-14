@@ -13,3 +13,39 @@ type cases = [
   Expect<Equal<ParseQueryString<'k1=v1&k1=v1'>, { k1: 'v1' }>>,
   Expect<Equal<ParseQueryString<'k1=v1&k2=v2&k1=v2&k1=v3'>, { k1: ['v1', 'v2', 'v3']; k2: 'v2' }>>,
 ]
+// type ParseQueryString<S extends string> = S extends `${infer L}&${infer R}` ? (
+//   L extends `${infer LL}=${infer RR}` ? {
+
+//   } : ({
+//     L: true
+//   } & ParseQueryString<R>)
+// ) : {};
+type Merge<T, U> = {
+  [K in keyof T | keyof U]: K extends keyof U
+    ? K extends keyof T
+      ? U[K] extends unknown[]
+        ? [T[K], ...U[K]]
+        : T[K] extends U[K]
+        ? T[K]
+        : [T[K], U[K]]
+      : U[K]
+    : K extends keyof T
+    ? T[K]
+    : never
+}
+
+type ParsePair<T extends string> = T extends `${infer K}=${infer V}`
+  ? {
+      [P in K]: V
+    }
+  : {
+      [P in T]: true
+    }
+
+type ParseQueryString<T extends string> = T extends ''
+  ? {}
+  : T extends `${infer P}&${infer R}`
+  ? Merge<ParsePair<P>, ParseQueryString<R>>
+  : ParsePair<T>
+
+  // TODO

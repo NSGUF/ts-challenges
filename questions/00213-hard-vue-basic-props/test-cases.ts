@@ -58,3 +58,5 @@ VueBasicProps({
     },
   },
 })
+declare function VueBasicProps<P, D, C, M>(options: any): any
+// TODO

@@ -10,3 +10,12 @@ type cases = [
   Expect<Equal<CamelCase<''>, ''>>,
   Expect<Equal<CamelCase<'😎'>, '😎'>>,
 ]
+
+type First<S extends string> = S extends `${infer L}${infer R}` ? (
+  `${Uppercase<L>}`
+) : Uppercase<S>;
+type Last<S> = S extends `${infer L}${infer R}` ? R : S;
+type CamelCase<S extends string> = S extends `${infer L}_${infer R}` ? (
+  `${Lowercase<L>}${First<R>}${CamelCase<Last<R>>}`
+) : Lowercase<S>;
+type test = CamelCase<'HELLO_WORLD_WITH_TYPES'>;
