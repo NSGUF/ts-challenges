@@ -26,19 +26,10 @@ type cases = [
   Expect<Equal<ToPrimitive<PersonInfo>, ExpectedResult>>,
 ]
 
-type ToPrimitive<T> = T extends string
-    ? string
-    : T extends number
-        ? number
-        : T extends boolean
-            ? boolean
-            : T extends bigint
-                ? bigint
-                : T extends symbol
-                    ? symbol
-                    : {
-                      [K in keyof T]: ToPrimitive<T[K]>
-                    }
 type test = ToPrimitive<PersonInfo>
+type GetType<T> = T extends string ? string : T extends number ? number : T extends boolean ? boolean : T extends bigint ? bigint : T extends symbol ? symbol;
 
-// TODO
+type ToPrimitive<T> = {
+  [P in keyof T]: T[P] extends object ? ToPrimitive<T[P]> : GetType<T[P]>
+}
+

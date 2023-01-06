@@ -18,3 +18,9 @@ type cases = [
   ExpectTrue<ExpectExtends<Path<typeof example['foo']>, ['bar'] | ['baz'] | ['bar', 'a'] | ['baz', 'b'] | ['baz', 'c']>>,
   ExpectFalse<ExpectExtends<Path<typeof example['foo']['bar']>, ['z']>>,
 ]
+type Path<T, Prefix extends (keyof any)[] = [], U extends keyof T = keyof T, > =
+  U extends U
+    ? [...Prefix, U] | (T[U] extends object ? Path<T[U], [...Prefix, U]> : never)
+    : never;
+
+// TODO

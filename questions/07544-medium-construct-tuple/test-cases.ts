@@ -11,3 +11,4 @@ type cases = [
 ]
 
 type ConstructTuple<L extends number, S extends unknown[] = []> = S['length'] extends L ? S : ConstructTuple<L,  [...S, unknown]>;
+type test = ConstructTuple<1000>['length']

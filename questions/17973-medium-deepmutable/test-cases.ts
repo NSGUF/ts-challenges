@@ -73,3 +73,7 @@ type errors = [
   // @ts-expect-error
   DeepMutable<0>,
 ]
+
+type DeepMutable<T extends object> = {
+  -readonly [P in keyof T]: keyof T[P] extends never ? T[P] : (T[P] extends object ? DeepMutable<T[P]> : T[P])
+}
