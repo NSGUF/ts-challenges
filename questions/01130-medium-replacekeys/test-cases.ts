@@ -56,3 +56,8 @@ type cases = [
   Expect<Equal<ReplaceKeys<Nodes, 'name' | 'flag', { name: number; flag: string }>, ReplacedNodes>>,
   Expect<Equal<ReplaceKeys<Nodes, 'name', { aa: number }>, NodesNoName>>,
 ]
+
+type ReplaceKeys<U, T, Y> = {
+  [P in keyof U | keyof Y as ]
+}
+// TODO

@@ -20,3 +20,9 @@ type cases = [
   Expect<Equal<typeof hashOutput, 'a#b#c'>>,
   Expect<Equal<typeof longOutput, 'a-b-c-d-e-f-g-h'>>,
 ]
+// type GetJoin<D, P, S extends string = ''> = P extends [infer L, ...infer R] ? (R extends never ? `${L}` : `${L}${D}${GetJoin<D, R>}`) : '';
+type GetJoin<D extends string, P, S extends string = ''> = P extends [infer L extends string, ...infer R] ? (
+  R extends [] ? `${S}${L}` : GetJoin<D, R, `${S}${L}${D}`>
+) : S;
+declare function join<D extends string>(delimiter: D): <P extends string[]>(...parts: P) => GetJoin<D, P>
+type test = typeof oneCharOutput

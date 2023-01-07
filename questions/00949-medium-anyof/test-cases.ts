@@ -12,3 +12,7 @@ type cases = [
   Expect<Equal<AnyOf<[0, '', false, [], {}, undefined, null]>, false>>,
   Expect<Equal<AnyOf<[]>, false>>,
 ]
+type AnyOf<T extends readonly any[]> = T extends [infer L, ...infer R] ? (
+  L extends 0 | '' | false | [] | {[P in PropertyKey]: never} | undefined | null ? AnyOf<R> : true
+) : false;
+type test = AnyOf<[1, 'test', true, [1], { name: 'test' }, { 1: 'test' }]>

@@ -18,3 +18,6 @@ type cases = [
   Expect<Equal<Includes<[null], undefined>, false>>,
   Expect<Equal<Includes<[undefined], null>, false>>,
 ]
+type Includes<T extends readonly any[], U> = T extends [infer L, ...infer R] ? (
+  Equal<U, L> extends true ? true : Includes<R, U>
+) : false;

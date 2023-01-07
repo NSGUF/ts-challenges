@@ -42,3 +42,8 @@ type cases = [
   Expect<Equal<AppendToObject<test2, 'home', 1>, testExpect2>>,
   Expect<Equal<AppendToObject<test3, 'isMotherRussia', false | undefined>, testExpect3>>,
 ]
+type AppendToObject<T, U extends string, V> = {
+  [P in keyof T | U]: P extends keyof T ? T[P] : V
+}
+
+type test = AppendToObject<test1, 'home', boolean>

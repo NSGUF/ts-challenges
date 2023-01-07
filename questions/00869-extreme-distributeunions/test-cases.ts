@@ -80,3 +80,5 @@ type cases = [
   >
   >,
 ]
+type DistributeUnions<T> = any
+// TODO

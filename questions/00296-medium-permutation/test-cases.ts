@@ -7,3 +7,7 @@ type cases = [
   Expect<Equal<Permutation<boolean>, [false, true] | [true, false]>>,
   Expect<Equal<Permutation<never>, []>>,
 ]
+
+type Permutation<T, C = T> = Equal<T, never> extends true ? [] : (
+  C extends (infer U) ? [U, ...Permutation<Exclude<T, U>>] : never
+);

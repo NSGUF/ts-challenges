@@ -28,3 +28,12 @@ type cases = [
   Expect<Equal<RemoveIndexSignature<FooBar>, { [foobar](): void }>>,
   Expect<Equal<RemoveIndexSignature<Baz>, { bar(): void; baz: string }>>,
 ]
+
+// your answers
+// the index signature could be string/number/symbol
+// if the key type match any of them, then it is index signature
+type RemoveIndexSignature<T> = {
+  // must check string/number/symbol one by one, because the index type could use only part of PropertyKey
+  [K in keyof T as string extends K ? never : number extends K ? never: symbol extends K ? never: K]: T[K]
+}
+// TODO

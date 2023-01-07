@@ -26,3 +26,5 @@ type cases = [
   IsTrue<Equal<keyof UniqBar['baz'], keyof UniqFoo['baz']>>,
   IsTrue<Equal<keyof Foo, keyof UniqFoo & string>>,
 ]
+type DeepObjectToUniq<O extends object> = any
+// TODO

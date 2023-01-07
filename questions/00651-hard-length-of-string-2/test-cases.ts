@@ -27,3 +27,6 @@ type cases = [
   IsTrue<Equal<LengthOfString<'12345678901234567890123'>, 23>>,
   IsTrue<Equal<LengthOfString<'aaaaaaaaaaaaggggggggggggggggggggkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'>, 272>>,
 ]
+type LengthOfString<S extends string, A extends any[] = []> = S extends `${infer L}${infer R}` ? (
+  LengthOfString<R, [...A, 1]>
+) : A['length']

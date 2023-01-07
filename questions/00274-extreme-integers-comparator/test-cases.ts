@@ -19,3 +19,25 @@ type cases = [
   Expect<Equal<Comparator<27, 27>, Comparison.Equal>>,
   Expect<Equal<Comparator<-38, -38>, Comparison.Equal>>,
 ]
+enum Comparison {
+  Greater,
+  Equal,
+  Lower,
+}
+
+type Comparator<A extends number, B extends number> = A extends B ? Comparison.Equal : Iterate<A, B, []>;
+
+type Iterate<A extends number, B extends number, Tuple extends any[]> =
+  Tuple['length'] extends A ? ( // A is the smallest magnitude number and is positive
+    IsNegative<B> extends true ? Comparison.Greater : Comparison.Lower
+  ) : Tuple['length'] extends B ? ( // B is the smallest magnitude number and is positive
+    IsNegative<A> extends true ? Comparison.Lower : Comparison.Greater
+  ) : `-${Tuple['length']}` extends `${A}` ? ( // B is smallest magnitude number and is negative
+    IsNegative<B> extends true ? Comparison.Greater : Comparison.Lower
+  ) : `-${Tuple['length']}` extends `${B}` ? ( // A is smallest magnitude number and is negative
+    IsNegative<A> extends true ? Comparison.Lower : Comparison.Greater
+  ) : Iterate<A, B, [null, ...Tuple]>;
+
+type IsNegative<B extends number> = `${B}` extends `-${infer _}` ? true : false;
+
+// TODO

@@ -15,3 +15,9 @@ type cases = [
   Expect<Equal<IsUnion<string | 'a'>, false>>,
   Expect<Equal<IsUnion<never>, false>>,
 ]
+
+type IsUnion<T, U = T> = [T] extends [never] ? false : (
+  T extends never ? false : (
+    [U] extends [T] ? false : true
+  )
+);

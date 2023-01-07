@@ -9,3 +9,4 @@ type cases = [
   Expect<Equal<IsNever<[]>, false>>,
   Expect<Equal<IsNever<{}>, false>>,
 ]
+type IsNever<T> = [T] extends [never] ? true : false;

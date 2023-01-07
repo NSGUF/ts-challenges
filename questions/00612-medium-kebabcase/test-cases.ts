@@ -11,3 +11,10 @@ type cases = [
   Expect<Equal<KebabCase<''>, ''>>,
   Expect<Equal<KebabCase<'😎'>, '😎'>>,
 ]
+type KebabCase<S, A extends string = ''> = S extends `${infer L}${infer R}` ? (
+  Lowercase<L> extends L ? KebabCase<R, `${A}${L}`> : (
+    A extends '' ? KebabCase<R, `${Lowercase<L>}`> : KebabCase<R, `${A}-${Lowercase<L>}`>
+  ) 
+) : A;
+
+type test = KebabCase<'foo-bar'>;

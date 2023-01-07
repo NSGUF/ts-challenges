@@ -27,3 +27,4 @@ type cases = [
   Expect<Equal<PercentageParser<'1'>, Case10>>,
   Expect<Equal<PercentageParser<'100'>, Case11>>,
 ]
+// type PercentageParser<A extends string> = `${A}` extends `-${infer F}%` ? 

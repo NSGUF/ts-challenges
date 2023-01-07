@@ -98,3 +98,8 @@ const tuple = [5, 7] as const
 
 // @ts-expect-error: readonly [5, 7] is not assignable to never
 assertArrayIndex(tuple, 'tuple')
+function assertArrayIndex(array: readonly unknown[], key: string) {}
+
+type Index<Array> = any
+
+// TODO

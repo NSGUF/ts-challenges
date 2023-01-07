@@ -7,3 +7,5 @@ type cases = [
   Expect<Equal<ToNumber<'27'>, 27>>,
   Expect<Equal<ToNumber<'18@7_$%'>, never>>,
 ]
+
+type ToNumber<S extends string> = S extends `${infer R extends number}` ? R : never;

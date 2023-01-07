@@ -20,3 +20,6 @@ type cases = [
   Expect<Equal<Diff<Foo, Coo>, { age: string; gender: number }>>,
   Expect<Equal<Diff<Coo, Foo>, { age: string; gender: number }>>,
 ]
+type Diff<F, B> = {
+  [P in keyof F | keyof B as P extends keyof F ? (P extends keyof B ? never : P) : P]: P extends keyof B ? B[P] : (P extends keyof F ? F[P] : never) 
+}

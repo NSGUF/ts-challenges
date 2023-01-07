@@ -34,3 +34,5 @@ type cases = [
   Expect<Equal< typeof curried2Return9, boolean>>,
   Expect<Equal< typeof curried2Return10, boolean>>,
 ]
+
+declare function DynamicParamsCurrying(fn: any): any

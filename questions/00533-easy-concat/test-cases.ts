@@ -6,3 +6,4 @@ type cases = [
   Expect<Equal<Concat<[1, 2], [3, 4]>, [1, 2, 3, 4]>>,
   Expect<Equal<Concat<['1', 2, '3'], [false, boolean, '4']>, ['1', 2, '3', false, boolean, '4']>>,
 ]
+type Concat<T extends any[], U extends any[]> = [...T, ...U]
